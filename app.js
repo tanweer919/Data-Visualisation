@@ -11,7 +11,7 @@ app.get('/visualization', (req, res) => {
   res.render('visualization');
 });
 
-app.listen(4000, () => {
+app.listen(process.env.PORT, () => {
   console.log("server started");
 });
 app.use(function(req, res, next) {
