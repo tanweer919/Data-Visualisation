@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Visualization</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.min.css" rel="stylesheet">
+  <style>
+
+    .map-container{
+overflow:hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.map-container iframe{
+left:0;
+top:0;
+height:100%;
+width:100%;
+position:absolute;
+}
+  </style>
+</head>
+
+<body class="grey lighten-3">
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+
+      <!-- Heading -->
+      <div class="card mb-4 wow fadeIn">
+
+        <!--Card content-->
+        <div class="card-body d-sm-flex justify-content-between">
+
+          <h4 class="mb-2 mb-sm-0 pt-1">
+            <a href="https://mdbootstrap.com/docs/jquery/" target="_blank">Home Page</a>
+            <span>/</span>
+            <span>Visualization</span>
+          </h4>
+
+          <form class="d-flex justify-content-center">
+            <!-- Default input -->
+            <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
+            <button class="btn btn-primary btn-sm my-0 p" type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+      <!-- Heading -->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-9 mb-4">
+
+          <!--Card-->
+          <div class="card">
+              <div class="card-header">Year Wise Record</div>
+
+            <!--Card content-->
+            <div class="card-body" id ="cas">
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Card-->
+          <div class="card">
+            <div class="card-header">No of Vehicles Involved</div>
+
+            <!--Card content-->
+            <div class="card-body" id ="abc">      
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+        <!--Gridmd-6 column-->
+        <div class="col-md-6 mb-4">
+          <div class="card-header">Month Wise</div>
+
+          <!--Card-->
+          <div class="card" id="mas">
+
+            <!--Card content-->
+            <div class="card-body">
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-6 mb-4">
+
+          <!--Card-->
+          <div class="card">
+
+            <!-- Card header -->
+            <div class="card-header">Road Type</div>
+
+            <!--Card content-->
+            <div class="card-body" id="jas">
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+      </div>
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+
+  </script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+
+  <!-- Charts -->
+  <script>
+    // Line
+    d3.json('http://localhost:4000/csv', (data) => {
+      var ycas = [{"year":2005, "No_of_Casualities": 195234},
+      {"year":2006, "No_of_Casualities": 191243},
+      {"year":2007, "No_of_Casualities": 186394},
+      {"year":2008, "No_of_Casualities": 181239},
+      {"year":2009, "No_of_Casualities": 173235},
+      {"year":2010, "No_of_Casualities": 166948},
+      {"year":2011, "No_of_Casualities": 153567},
+      {"year":2015, "No_of_Casualities": 150343},
+      {"year":2013, "No_of_Casualities": 148679},
+      {"year":2014, "No_of_Casualities": 151234},
+      {"year":2015, "No_of_Casualities": 40124}]
+      var svga = dimple.newSvg("#cas", 600, 400);
+      var chart = new dimple.chart(svga,ycas );
+      chart.setBounds(80,20, 450, 320)
+      chart.addCategoryAxis("x", "year");
+      chart.addMeasureAxis("y", "No_of_Casualities");
+      chart.addSeries(null, dimple.plot.bar);
+      chart.draw()
+      // var wcas = [{"Weather_Conditions": "Sunny", "Percentage": 36}, {"Weather_Conditions": "Rainy", "Percentage": 21}, {"Weather_Conditions":"Fog", "Percentage":10}, {"Weather_Conditions":"Mist", "Percentage": 16}, {"Weather_Conditions": "Cloudy", "Percentage": 17}]
+    //   var wcas = [
+    //   { "Weather_Conditions":"Sunny", "Percentage":  36},
+    //   { "Weather_Conditions":"Rainy", "Percentage":  21},
+    //   { "Weather_Conditions":"Cloudy", "Percentage":  17},
+    //   { "Weather_Conditions":"Mist", "Percentage":  16},
+    //   { "Weather_Conditions":"Fog", "Percentage":  10}
+    // ];
+    //   var svgpie = dimple.newSvg("#abc", 350, 270);
+    //   var myChart = new dimple.chart(svgpie, wcas);
+    //   myChart.addMeasureAxis("p", "Percentage");
+    //   var ring = myChart.addSeries("Weather_Conditions", dimple.plot.pie);
+    //   myChart.addLegend(500, 20, 90, 300, "left");
+    //   myChart.draw();
+      var mas = []
+      data.map((d) => {
+        mas.push({'month': d.month, "No_of_Casualities": 18 * d.No_of_Casualities})
+      });
+      var svg2 = dimple.newSvg("#mas", 390, 240);
+      var chart = new dimple.chart(svg2,mas );
+      chart.addCategoryAxis("x", "month");
+      chart.addMeasureAxis("y", "No_of_Casualities");
+      chart.addSeries(null, dimple.plot.bar);
+      chart.draw()
+      var nas = []
+      data.map((d) => {
+        nas.push({'Number_of_Vehicles': d.Number_of_Vehicles, "No_of_Casualities": 18 * d.No_of_Casualities})
+      });
+      var svg2 = dimple.newSvg("#abc", 390, 240);
+      var chart = new dimple.chart(svg2,nas );
+      chart.addCategoryAxis("x", "Number_of_Vehicles");
+      chart.addMeasureAxis("y", "No_of_Casualities");
+      chart.addSeries(null, dimple.plot.bar);
+      chart.draw()
+      var jas = []
+      data.map((d) => {
+        jas.push({'Road_Type': d.Road_Type, "No_of_Casualities": 18 * d.No_of_Casualities})
+      });
+      var svg3 = dimple.newSvg("#jas", 390, 240);
+      var chart = new dimple.chart(svg3,jas );
+      chart.addCategoryAxis("x", "Road_Type");
+      chart.addMeasureAxis("y", "No_of_Casualities");
+      chart.addSeries(null, dimple.plot.bar);
+      chart.draw()
+    });
+  </script>
+</body>
+
+</html>
