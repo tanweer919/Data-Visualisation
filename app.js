@@ -11,7 +11,7 @@ app.use(function(req, res, next) {
 app.get('/csv', (req, res) => {
   res.sendFile('accident.json', {root: __dirname});
 });
-app.get('/visualization', (req, res) => {
+app.get('/', (req, res) => {
   res.render('visualization');
 });
 app.listen(process.env.PORT||4000, () => {
